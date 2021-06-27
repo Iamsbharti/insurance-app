@@ -1,0 +1,60 @@
+.input__form__main {
+  height: 85vh !important;
+  padding: 2rem;
+}
+.name__address__section {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.address__section,
+.name__section {
+  width: 49%;
+}
+.section__intro {
+  display: inline-block;
+  margin-bottom: 10px;
+  color: gray;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+input,
+select,
+textarea {
+  margin-bottom: 7px !important;
+}
+.vehicle_type_section {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2px;
+  padding: 2px;
+}
+label {
+  margin: 0px 8px 4px 0px;
+  color: gray;
+}
+.vehicle_type_sub_section,
+.form__submission {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+button {
+  background-color: #b3b6a4 !important;
+  color: white !important;
+  font-weight: 500 !important;
+  font-size: 1.1rem !important;
+  border-radius: 5px !important;
+  width: 8vw !important;
+}
+
+button {
+  cursor: pointer;
+}
+button:hover {
+  transform: scale(1.1);
+  color: red !important;
+}
