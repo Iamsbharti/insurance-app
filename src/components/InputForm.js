@@ -15,11 +15,12 @@ export const InputForm = () => {
   const [driversCount, setDriversCount] = useState();
   const [isCommercial, setIsCommercial] = useState();
   const [canUseOutSide, setCanUserOutSide] = useState();
-  const [currentValue, setCurrentValue] = useState();
+  const [currentValue, setCurrentValue] = useState(0);
   const [registeredDate, setRegisteredDate] = useState();
   const submitForm = (e) => {
     e.preventDefault();
     console.log("Submitting Form");
+    console.log("sal::", salutation);
   };
   return (
     <>
@@ -28,37 +29,37 @@ export const InputForm = () => {
           <div className="name__section">
             <span className="section__intro">Vehicle Owner's Info</span>
             <select
-              class="form-select salutation__text"
+              className="form-select salutation__text"
               aria-label="Prefix"
-              name={salutation}
+              value={salutation}
               onChange={(e) => setSalutation(e.target.value)}
             >
-              <option selected>Salutation</option>
+              <option>Salutation</option>
               <option value="Mr">Mr.</option>
               <option value="Ms">Ms.</option>
             </select>
             <input
               type="text"
-              class="form-control"
+              className="form-control"
               placeholder="First Name"
               aria-label="First name"
-              name={firstName}
+              value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
             />
             <input
               type="text"
-              class="form-control"
+              className="form-control"
               placeholder="Last Name"
               aria-label="Last name"
-              name={lastName}
+              value={lastName}
               onChange={(e) => setLastName(e.target.value)}
             />
             <input
               type="text"
-              class="form-control"
+              className="form-control"
               placeholder="Telephone No"
               aria-label="Telephone No"
-              name={telephone}
+              value={telephone}
               onChange={(e) => setTelephone(e.target.value)}
             />
           </div>
@@ -67,25 +68,25 @@ export const InputForm = () => {
             <div className="input__card">
               <textarea
                 type="text"
-                class="form-control"
+                className="form-control"
                 placeholder="Address Line 1"
                 required
                 rows="2"
-                name={addressLine1}
+                value={addressLine1}
                 onChange={(e) => setAddrL1(e.target.value)}
               />
               <textarea
                 type="textarea"
-                class="form-control"
+                className="form-control"
                 placeholder="Address Line 2"
                 required
                 rows="2"
-                name={addressLine2}
+                value={addressLine2}
                 onChange={(e) => setAddrL2(e.target.value)}
               />
               <input
                 type="text"
-                class="form-control"
+                className="form-control"
                 placeholder="City"
                 required
                 name={city}
@@ -93,10 +94,10 @@ export const InputForm = () => {
               />
               <input
                 type="text"
-                class="form-control"
+                className="form-control"
                 placeholder="PostCode/Zip Code"
                 required
-                name={pincode}
+                value={pincode}
                 onChange={(e) => setPinCode(e.target.value)}
               />
             </div>
@@ -105,10 +106,14 @@ export const InputForm = () => {
         <div className="vechile__info">
           <span className="section__intro">Vehicle Info</span>
           <div className="vehicle_type_section">
-            <div classname="type">
+            <div className="type">
               <label>Type</label>
-              <select class="form-select">
-                <option selected>Select a Vehicle type</option>
+              <select
+                className="form-select"
+                value={vehicleType}
+                onChange={(e) => setVehicleType(e.target.value)}
+              >
+                <option>Select a Vehicle type</option>
                 <option value="Cabriolet">Cabriolet</option>
                 <option value="Coupe">Coupe</option>
                 <option value="Estate">Estate</option>
@@ -116,10 +121,14 @@ export const InputForm = () => {
                 <option value="other">other</option>
               </select>
             </div>
-            <div classname="size">
+            <div className="size">
               <label>Engine Size</label>
-              <select class="form-select">
-                <option selected>Select Engine Size</option>
+              <select
+                className="form-select"
+                value={engineSize}
+                onChange={(e) => setEngineSize(e.target.value)}
+              >
+                <option>Select Engine Size</option>
                 <option value="1000">1000</option>
                 <option value="1600">1600</option>
                 <option value="2000">2000</option>
@@ -128,18 +137,26 @@ export const InputForm = () => {
                 <option value="other">other</option>
               </select>
             </div>
-            <div classname="Usage">
+            <div className="Usage">
               <label>Usage</label>
-              <select class="form-select">
-                <option selected>Commercial Usage?</option>
+              <select
+                className="form-select"
+                value={isCommercial}
+                onChange={(e) => setIsCommercial(e.target.value)}
+              >
+                <option>Commercial Usage?</option>
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
               </select>
             </div>
-            <div classname="registered__state">
-              <label class="form-label">Registered State</label>
-              <select class="form-select">
-                <option selected>Registered State ?</option>
+            <div className="registered__state">
+              <label className="form-label">Registered State</label>
+              <select
+                className="form-select"
+                value={canUseOutSide}
+                onChange={(e) => setCanUserOutSide(e.target.value)}
+              >
+                <option>Registered State ?</option>
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
               </select>
@@ -148,8 +165,12 @@ export const InputForm = () => {
           <div className="vehicle_type_sub_section">
             <div className="driver__count">
               <label>Driver's Count</label>
-              <select class="form-select">
-                <option selected>Additional Driver's Count</option>
+              <select
+                className="form-select"
+                value={driversCount}
+                onChange={(e) => setDriversCount(e.target.value)}
+              >
+                <option>Additional Driver's Count</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -160,26 +181,27 @@ export const InputForm = () => {
               <label>Registered Date</label>
               <input
                 type="date"
-                class="form-control"
-                name={registeredDate}
+                className="form-control"
+                value={registeredDate}
                 onChange={(e) => setRegisteredDate(e.target.value)}
               />
             </div>
             <div className="curr__value">
               <label>Current Value(0-50000)</label>
+              <span> {currentValue}</span>
               <input
                 type="range"
-                class="form-range"
+                className="form-range"
                 min="0"
                 max="50000"
-                name={currentValue}
+                value={currentValue}
                 onChange={(e) => setCurrentValue(e.target.value)}
               />
             </div>
           </div>
         </div>
         <div className="form__submission">
-          <button>Submit</button>
+          <button onClick={submitForm}>Submit</button>
           <button>Reset</button>
         </div>
       </div>
