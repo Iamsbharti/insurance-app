@@ -1,14 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import "../css/Inputform.css";
 
 export const InputForm = () => {
+  const [salutation, setSalutation] = useState();
+  const [firstName, setFirstName] = useState();
+  const [lastName, setLastName] = useState();
+  const [telephone, setTelephone] = useState();
+  const [addressLine1, setAddrL1] = useState();
+  const [addressLine2, setAddrL2] = useState();
+  const [city, setCity] = useState();
+  const [pincode, setPinCode] = useState();
+  const [vehicleType, setVehicleType] = useState();
+  const [engineSize, setEngineSize] = useState();
+  const [driversCount, setDriversCount] = useState();
+  const [isCommercial, setIsCommercial] = useState();
+  const [canUseOutSide, setCanUserOutSide] = useState();
+  const [currentValue, setCurrentValue] = useState();
+  const [registeredDate, setRegisteredDate] = useState();
+  const submitForm = (e) => {
+    e.preventDefault();
+    console.log("Submitting Form");
+  };
   return (
     <>
       <div className="input__form__main">
         <div className="name__address__section">
           <div className="name__section">
             <span className="section__intro">Vehicle Owner's Info</span>
-            <select class="form-select salutation__text" aria-label="Prefix">
+            <select
+              class="form-select salutation__text"
+              aria-label="Prefix"
+              name={salutation}
+              onChange={(e) => setSalutation(e.target.value)}
+            >
               <option selected>Salutation</option>
               <option value="Mr">Mr.</option>
               <option value="Ms">Ms.</option>
@@ -18,18 +42,24 @@ export const InputForm = () => {
               class="form-control"
               placeholder="First Name"
               aria-label="First name"
+              name={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
             />
             <input
               type="text"
               class="form-control"
               placeholder="Last Name"
               aria-label="Last name"
+              name={lastName}
+              onChange={(e) => setLastName(e.target.value)}
             />
             <input
               type="text"
               class="form-control"
               placeholder="Telephone No"
               aria-label="Telephone No"
+              name={telephone}
+              onChange={(e) => setTelephone(e.target.value)}
             />
           </div>
           <div className="address__section">
@@ -41,6 +71,8 @@ export const InputForm = () => {
                 placeholder="Address Line 1"
                 required
                 rows="2"
+                name={addressLine1}
+                onChange={(e) => setAddrL1(e.target.value)}
               />
               <textarea
                 type="textarea"
@@ -48,18 +80,24 @@ export const InputForm = () => {
                 placeholder="Address Line 2"
                 required
                 rows="2"
+                name={addressLine2}
+                onChange={(e) => setAddrL2(e.target.value)}
               />
               <input
                 type="text"
                 class="form-control"
                 placeholder="City"
                 required
+                name={city}
+                onChange={(e) => setCity(e.target.value)}
               />
               <input
                 type="text"
                 class="form-control"
                 placeholder="PostCode/Zip Code"
                 required
+                name={pincode}
+                onChange={(e) => setPinCode(e.target.value)}
               />
             </div>
           </div>
@@ -120,7 +158,12 @@ export const InputForm = () => {
             </div>
             <div className="registered__date">
               <label>Registered Date</label>
-              <input type="date" class="form-control" name="register" />
+              <input
+                type="date"
+                class="form-control"
+                name={registeredDate}
+                onChange={(e) => setRegisteredDate(e.target.value)}
+              />
             </div>
             <div className="curr__value">
               <label>Current Value(0-50000)</label>
@@ -129,7 +172,8 @@ export const InputForm = () => {
                 class="form-range"
                 min="0"
                 max="50000"
-                name="registeredDate"
+                name={currentValue}
+                onChange={(e) => setCurrentValue(e.target.value)}
               />
             </div>
           </div>
