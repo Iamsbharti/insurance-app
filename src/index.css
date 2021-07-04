@@ -14,3 +14,7 @@ code {
 .footer_text {
   text-align: center;
 }
+footer {
+  margin-top: 50px !important;
+  padding: 20px;
+}

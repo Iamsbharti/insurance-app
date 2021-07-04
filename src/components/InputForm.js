@@ -1,27 +1,97 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../css/Inputform.css";
 
 export const InputForm = () => {
-  const [salutation, setSalutation] = useState();
-  const [firstName, setFirstName] = useState();
-  const [lastName, setLastName] = useState();
-  const [telephone, setTelephone] = useState();
-  const [addressLine1, setAddrL1] = useState();
-  const [addressLine2, setAddrL2] = useState();
-  const [city, setCity] = useState();
-  const [pincode, setPinCode] = useState();
-  const [vehicleType, setVehicleType] = useState();
-  const [engineSize, setEngineSize] = useState();
-  const [driversCount, setDriversCount] = useState();
-  const [isCommercial, setIsCommercial] = useState();
-  const [canUseOutSide, setCanUserOutSide] = useState();
+  const [salutation, setSalutation] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [telephone, setTelephone] = useState("");
+  const [addressLine1, setAddrL1] = useState("");
+  const [addressLine2, setAddrL2] = useState("");
+  const [city, setCity] = useState("");
+  const [pincode, setPinCode] = useState("");
+  const [vehicleType, setVehicleType] = useState("");
+  const [engineSize, setEngineSize] = useState("");
+  const [driversCount, setDriversCount] = useState("");
+  const [isCommercial, setIsCommercial] = useState("");
+  const [canUseOutSide, setCanUserOutSide] = useState("");
   const [currentValue, setCurrentValue] = useState(0);
-  const [registeredDate, setRegisteredDate] = useState();
-  const submitForm = (e) => {
-    e.preventDefault();
-    console.log("Submitting Form");
-    console.log("sal::", salutation);
+  const [registeredDate, setRegisteredDate] = useState("");
+
+  const VALUE_SELECTION = "*required";
+  const REQUIRED_FIELD = "can't be empty";
+  const [fieldErrors, setFieldErrors] = useState({
+    salutation: "",
+    firstName: "",
+    lastName: "",
+    telephone: "",
+    error: false,
+    addressLine: "",
+    city: "",
+    pincode: "",
+    vehicleType: "",
+    engineSize: "",
+    driversCount: "",
+    isCommercial: "",
+    canUseOutSide: "",
+    currentValue: 0,
+    registeredDate: 0,
+  });
+
+  const updateErrorProp = (prop, udpatedValue) => {
+    setFieldErrors((prevState) => ({
+      ...prevState,
+      [prop]: udpatedValue,
+    }));
   };
+  const validationCheck = () => {
+    console.log("validation checks::", vehicleType, engineSize, driversCount);
+    if (salutation === "") {
+      updateErrorProp("salutation", VALUE_SELECTION);
+    }
+    if (firstName === "") {
+      updateErrorProp("firstName", `First Name ${REQUIRED_FIELD}`);
+    }
+    if (lastName === "") {
+      updateErrorProp("lastName", `LastName ${REQUIRED_FIELD}`);
+    }
+    if (telephone === "") {
+      updateErrorProp("telephone", `Telephone ${REQUIRED_FIELD}`);
+    }
+    if (addressLine1 === "" || addressLine2 === "") {
+      updateErrorProp("addressLine", `Address ${REQUIRED_FIELD}`);
+    }
+    if (city === "") {
+      updateErrorProp("city", `City ${REQUIRED_FIELD}`);
+    }
+    if (pincode === "") {
+      updateErrorProp("pincode", `Pincode ${REQUIRED_FIELD}`);
+    }
+    if (vehicleType === "") {
+      updateErrorProp("vehicleType", VALUE_SELECTION);
+    }
+    if (engineSize === "") {
+      updateErrorProp("engineSize", VALUE_SELECTION);
+    }
+    if (driversCount === "") {
+      updateErrorProp("driversCount", VALUE_SELECTION);
+    }
+    if (isCommercial === "" || canUseOutSide === "") {
+      updateErrorProp("isCommercial", VALUE_SELECTION);
+    }
+    if (registeredDate === 0) {
+      updateErrorProp("registeredDate", VALUE_SELECTION);
+    }
+    if (currentValue === 0) {
+      updateErrorProp("currentValue", VALUE_SELECTION);
+    }
+  };
+
+  const submitForm = (e) => {
+    validationCheck();
+    console.log("Submitting Form");
+  };
+
   return (
     <>
       <div className="input__form__main">
@@ -37,7 +107,14 @@ export const InputForm = () => {
               <option>Salutation</option>
               <option value="Mr">Mr.</option>
               <option value="Ms">Ms.</option>
+              <option value="Mr">Miss.</option>
             </select>
+            <span
+              className="error__message"
+              hidden={fieldErrors.salutation === ""}
+            >
+              {`${fieldErrors.salutation} for salutation`}
+            </span>
             <input
               type="text"
               className="form-control"
@@ -46,6 +123,12 @@ export const InputForm = () => {
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
             />
+            <span
+              className="error__message"
+              hidden={fieldErrors.firstName === ""}
+            >
+              {fieldErrors.firstName}
+            </span>
             <input
               type="text"
               className="form-control"
@@ -54,6 +137,12 @@ export const InputForm = () => {
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
             />
+            <span
+              className="error__message"
+              hidden={fieldErrors.lastName === ""}
+            >
+              {fieldErrors.lastName}
+            </span>
             <input
               type="text"
               className="form-control"
@@ -62,6 +151,12 @@ export const InputForm = () => {
               value={telephone}
               onChange={(e) => setTelephone(e.target.value)}
             />
+            <span
+              className="error__message"
+              hidden={fieldErrors.telephone === ""}
+            >
+              {fieldErrors.telephone}
+            </span>
           </div>
           <div className="address__section">
             <span className="section__intro">Address</span>
@@ -84,6 +179,12 @@ export const InputForm = () => {
                 value={addressLine2}
                 onChange={(e) => setAddrL2(e.target.value)}
               />
+              <span
+                className="error__message"
+                hidden={fieldErrors.addressLine === ""}
+              >
+                {fieldErrors.addressLine}
+              </span>
               <input
                 type="text"
                 className="form-control"
@@ -92,6 +193,9 @@ export const InputForm = () => {
                 name={city}
                 onChange={(e) => setCity(e.target.value)}
               />
+              <span className="error__message" hidden={fieldErrors.city === ""}>
+                {fieldErrors.city}
+              </span>
               <input
                 type="text"
                 className="form-control"
@@ -100,6 +204,12 @@ export const InputForm = () => {
                 value={pincode}
                 onChange={(e) => setPinCode(e.target.value)}
               />
+              <span
+                className="error__message"
+                hidden={fieldErrors.pincode === ""}
+              >
+                {fieldErrors.pincode}
+              </span>
             </div>
           </div>
         </div>
@@ -120,6 +230,12 @@ export const InputForm = () => {
                 <option value="HatchBack">HatchBack</option>
                 <option value="other">other</option>
               </select>
+              <span
+                className="error__message"
+                hidden={fieldErrors.vehicleType === ""}
+              >
+                {fieldErrors.vehicleType}
+              </span>
             </div>
             <div className="size">
               <label>Engine Size</label>
@@ -136,33 +252,14 @@ export const InputForm = () => {
                 <option value="2500">2500</option>
                 <option value="other">other</option>
               </select>
-            </div>
-            <div className="Usage">
-              <label>Usage</label>
-              <select
-                className="form-select"
-                value={isCommercial}
-                onChange={(e) => setIsCommercial(e.target.value)}
+              <span
+                className="error__message"
+                hidden={fieldErrors.engineSize === ""}
               >
-                <option>Commercial Usage?</option>
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
-              </select>
+                {fieldErrors.engineSize}
+              </span>
             </div>
-            <div className="registered__state">
-              <label className="form-label">Registered State</label>
-              <select
-                className="form-select"
-                value={canUseOutSide}
-                onChange={(e) => setCanUserOutSide(e.target.value)}
-              >
-                <option>Registered State ?</option>
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
-              </select>
-            </div>
-          </div>
-          <div className="vehicle_type_sub_section">
+
             <div className="driver__count">
               <label>Driver's Count</label>
               <select
@@ -176,7 +273,85 @@ export const InputForm = () => {
                 <option value="3">3</option>
                 <option value="4">4</option>
               </select>
+              <span
+                className="error__message"
+                hidden={fieldErrors.driversCount === ""}
+              >
+                {fieldErrors.driversCount}
+              </span>
             </div>
+          </div>
+          <div className="vehicle_type_sub_section_1">
+            <div className="registered__state">
+              <label className="form-label">
+                Will the vechile be used outside registered state ?
+              </label>
+              <div
+                className="form-check"
+                onChange={(e) => setCanUserOutSide(e.target.value)}
+              >
+                <div>
+                  <input
+                    className="form-check-input"
+                    name="registered"
+                    type="radio"
+                    value={canUseOutSide}
+                  />
+                  <span>Yes</span>
+                </div>
+                <div>
+                  <input
+                    className="form-check-input"
+                    name="registered"
+                    type="radio"
+                    value={canUseOutSide}
+                  />
+                  <span>No</span>
+                </div>
+              </div>
+              <span
+                className="error__message"
+                hidden={fieldErrors.canUseOutSide === ""}
+              >
+                {fieldErrors.canUseOutSide}
+              </span>
+            </div>
+            <div className="Usage">
+              <label className="form-label">
+                Will the vechile be used for commercial purpose ?
+              </label>
+              <div
+                className="form-check"
+                onChange={(e) => setIsCommercial(e.target.value)}
+              >
+                <div>
+                  <input
+                    className="form-check-input"
+                    name="registered"
+                    type="radio"
+                    value={isCommercial}
+                  />
+                  <span>Yes</span>
+                </div>
+                <div>
+                  <input
+                    className="form-check-input"
+                    name="registered"
+                    type="radio"
+                    value={isCommercial}
+                  />
+                  <span>No</span>
+                </div>
+              </div>
+              <span
+                className="error__message"
+                hidden={fieldErrors.isCommercial === ""}
+              >
+                {fieldErrors.isCommercial}
+              </span>
+            </div>
+          </div>
+          <div className="vehicle_type_sub_section_2">
             <div className="registered__date">
               <label>Registered Date</label>
               <input
@@ -185,10 +360,15 @@ export const InputForm = () => {
                 value={registeredDate}
                 onChange={(e) => setRegisteredDate(e.target.value)}
               />
+              <span
+                className="error__message"
+                hidden={fieldErrors.registeredDate === ""}
+              >
+                {fieldErrors.registeredDate}
+              </span>
             </div>
             <div className="curr__value">
               <label>Current Value(0-50000)</label>
-              <span> {currentValue}</span>
               <input
                 type="range"
                 className="form-range"
@@ -197,6 +377,13 @@ export const InputForm = () => {
                 value={currentValue}
                 onChange={(e) => setCurrentValue(e.target.value)}
               />
+              <p> {currentValue}</p>
+              <span
+                className="error__message"
+                hidden={fieldErrors.currentValue === 0}
+              >
+                {fieldErrors.currentValue}
+              </span>
             </div>
           </div>
         </div>

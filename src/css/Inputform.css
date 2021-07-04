@@ -1,5 +1,5 @@
 .input__form__main {
-  height: 85vh !important;
+  height: 100vh;
   padding: 2rem;
 }
 .name__address__section {
@@ -34,13 +34,16 @@ textarea {
 label {
   margin: 0px 8px 4px 0px;
   color: gray;
+  font-size: 1.1rem;
+  font-weight: 500;
 }
-.vehicle_type_sub_section,
+.vehicle_type_sub_section_1,
+.vehicle_type_sub_section_2,
 .form__submission {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  margin-top: 20px;
+  margin-top: 14px;
 }
 button {
   background-color: #b3b6a4 !important;
@@ -57,4 +60,13 @@ button {
 button:hover {
   transform: scale(1.1);
   color: red !important;
+}
+.curr__value {
+  margin-right: 70px;
+}
+.error__message {
+  display: inline-block;
+  color: red;
+  font-size: 0.9rem;
+  margin: 0px 9px 10px 19px;
 }
