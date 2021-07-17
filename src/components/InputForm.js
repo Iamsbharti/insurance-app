@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "../css/Inputform.css";
-
+import { useHistory } from "react-router-dom";
 export const InputForm = () => {
   const [salutation, setSalutation] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -17,24 +17,6 @@ export const InputForm = () => {
   const [canUseOutSide, setCanUserOutSide] = useState("");
   const [currentValue, setCurrentValue] = useState(0);
   const [registeredDate, setRegisteredDate] = useState("");
-
-  const [insuranceQuoteState, setInsuranceQuoteState] = useState({
-    salutation: "",
-    firstName: "",
-    lastName: "",
-    telephone: "",
-    error: false,
-    addressLine: "",
-    city: "",
-    pincode: "",
-    vehicleType: "",
-    engineSize: "",
-    driversCount: "",
-    isCommercial: "",
-    canUseOutSide: "",
-    currentValue: 0,
-    registeredDate: 0,
-  });
 
   const VALUE_SELECTION = "*required";
   const REQUIRED_FIELD = "can't be empty";
@@ -62,15 +44,9 @@ export const InputForm = () => {
       [prop]: udpatedValue,
     }));
   };
-  const updateInsuranceState = (prop, udpatedValue) => {
-    setInsuranceQuoteState((prevState) => ({
-      ...prevState,
-      [prop]: udpatedValue,
-    }));
-  };
-  const resetQuoteState = () => {
-    console.log("rset");
-    setInsuranceQuoteState(insuranceQuoteState);
+  let history = useHistory();
+  const reloadForm = () => {
+    history.push("/");
   };
   const validationCheck = () => {
     console.log("validation checks::", vehicleType, engineSize, driversCount);
@@ -129,10 +105,8 @@ export const InputForm = () => {
             <select
               className="form-select salutation__text"
               aria-label="Prefix"
-              value={insuranceQuoteState.salutation}
-              onChange={(e) =>
-                updateInsuranceState("salutation", e.target.value)
-              }
+              value={salutation}
+              onChange={(e) => setSalutation(e.target.value)}
             >
               <option>Salutation</option>
               <option value="Mr">Mr.</option>
@@ -150,10 +124,8 @@ export const InputForm = () => {
               className="form-control"
               placeholder="First Name"
               aria-label="First name"
-              value={insuranceQuoteState.firstName}
-              onChange={(e) =>
-                updateInsuranceState("firstName", e.target.value)
-              }
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
             />
             <span
               className="error__message"
@@ -421,6 +393,7 @@ export const InputForm = () => {
         </div>
         <div className="form__submission">
           <button onClick={submitForm}>Submit</button>
+          <button onClick={reloadForm}>Reset</button>
         </div>
       </div>
     </>
