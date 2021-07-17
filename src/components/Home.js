@@ -6,8 +6,7 @@ export const Home = () => {
   return (
     <div className="home__main">
       <div className="intro__hero__text">
-        <p>Get</p>
-        <p>Insured</p>
+        <p>Get Insured</p>
         <p>At Best</p>
         <p>Price</p>
       </div>
