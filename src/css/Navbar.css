@@ -5,3 +5,19 @@
   display: inline-block;
   margin-right: 3rem;
 }
+.nav__links {
+  display: flex;
+  list-style: none;
+  justify-content: space-around;
+  margin: 2px;
+}
+.nav__links li {
+  padding-left: 2rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  cursor: pointer;
+  color: white;
+}
+.nav__links > li:hover {
+  transform: scale(1.1);
+}
