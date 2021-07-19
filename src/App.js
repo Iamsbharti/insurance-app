@@ -5,7 +5,6 @@ import { InputForm } from "./components/InputForm";
 import { Route, Switch } from "react-router-dom";
 import { Admin } from "./components/Admin";
 import { Home } from "./components/Home";
-import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
@@ -23,7 +22,6 @@ function App() {
         </Route>
       </Switch>
       <Footer />
-      <ToastContainer autoClose={3000} hideProgressBar />
     </div>
   );
 }
