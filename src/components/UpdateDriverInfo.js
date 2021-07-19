@@ -138,7 +138,14 @@ export const UpdateDriverInfo = ({
           </>
         ) : (
           <>
-            <p style={{ color: "red", fontSize: "1.4rem", fontWeight: "600" }}>
+            <p
+              style={{
+                color: "red",
+                fontSize: "1.4rem",
+                fontWeight: "600",
+                margin: "50px",
+              }}
+            >
               {errorMessage}
             </p>
           </>

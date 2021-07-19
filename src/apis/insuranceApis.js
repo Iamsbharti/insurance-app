@@ -13,7 +13,7 @@ export const saveDriversQuote = async (driversInfo) => {
     return saveDriversQuoteResponse.data;
   } catch (error) {
     console.error("Save Driver's Quote::", error.message);
-    return error;
+    return error.response;
   }
 };
 
@@ -36,13 +36,13 @@ export const deleteDriverQuote = async (driverId) => {
   console.log("Delete drivers quote api::", driverId);
   try {
     let deleteDriversInfoResponse = await axios.delete(
-      `${baseUrl}/get/driver/quote/${driverId}`
+      `${baseUrl}/delete/driver/quote/${driverId}`
     );
     console.log("Delete driver's info response:", deleteDriversInfoResponse);
     return deleteDriversInfoResponse.data;
   } catch (error) {
     console.warn("Error Deleting DriverInfo::", error.message);
-    return error;
+    return error.response;
   }
 };
 export const updateDriverInfo = async (driversInfo) => {
