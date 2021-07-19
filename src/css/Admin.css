@@ -7,7 +7,16 @@
   font-size: 600;
 }
 .admin__contents {
-  width: 50%;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+.admin__inputs__section {
+  width: 40%;
+}
+.admin__info__Section {
+  margin-top: -20px;
+  width: 60%;
 }
 button {
   margin-top: 2rem !important;
