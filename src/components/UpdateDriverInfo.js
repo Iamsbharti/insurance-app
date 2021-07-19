@@ -1,19 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "../css/Inputform.css";
 export const UpdateDriverInfo = ({
   driversInfo,
   manageDriverInfoUpdates,
   errorMessage,
 }) => {
-  const {
-    salutation,
-    firstName,
-    lastName,
-    telephone,
-    address,
-    city,
-    pincode: pinCode,
-  } = driversInfo;
+  const { salutation, firstName, lastName, telephone, address, city } =
+    driversInfo;
   console.log("driversInfo:", Object.keys(driversInfo).length, errorMessage);
   const [toUpdateDriverInfo, setUpdateDriversInfo] = useState(driversInfo);
   const handleDriverInfoUpdates = (prop, newValue) => {
