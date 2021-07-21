@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../css/Inputform.css";
 import { useHistory } from "react-router-dom";
+import { saveDriversQuote } from "../apis/insuranceApis";
 export const InputForm = () => {
   const [salutation, setSalutation] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -91,9 +92,28 @@ export const InputForm = () => {
     }
   };
 
-  const submitForm = (e) => {
+  const submitForm = async (e) => {
     validationCheck();
     console.log("Submitting Form");
+    let driversInfo = {
+      salutation,
+      firstName,
+      lastName,
+      telephone,
+      address: addressLine1 + addressLine2,
+      city,
+      pinCode: pincode,
+      vehicleType,
+      engineSize,
+      driversCount,
+      isCommercial,
+      canUseOutSide,
+      currentValue,
+      registeredDate,
+    };
+    let response = await saveDriversQuote(driversInfo);
+    console.log("response::", response);
+    alert(response.message);
   };
 
   return (

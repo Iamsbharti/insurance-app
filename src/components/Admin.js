@@ -22,7 +22,7 @@ export const Admin = () => {
         response = await getDriversInfo(driverId);
         console.log("response::", response);
         setToggleDriversInfo(!toggleDriversInfo);
-        if (response.status === "success") {
+        if (response && response.status === "success") {
           setDriversInfo(response.data);
         } else {
           setErrorMessage(response.data.message);
@@ -35,7 +35,7 @@ export const Admin = () => {
       case "Delete":
         response = await deleteDriverQuote(driverId);
         setToggleDriversInfo(!toggleDriversInfo);
-        if (response.status === "success") {
+        if (response && response.status === "success") {
           setErrorMessage(response.message);
         } else {
           setErrorMessage(response.data.message);
