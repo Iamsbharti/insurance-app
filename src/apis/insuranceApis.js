@@ -30,6 +30,7 @@ export const getDriversInfo = async (driverId) => {
     return getDriversInfoResponse.data;
   } catch (error) {
     console.warn("Get Drivers info Error:", error);
+    toast.error(error.response.data.message);
     return error.response;
   }
 };
@@ -50,4 +51,20 @@ export const deleteDriverQuote = async (driverId) => {
 };
 export const updateDriverInfo = async (driversInfo) => {
   console.log("Update Drivers info::", driversInfo);
+  try {
+    let updateDriverInfoResponse = await axios.post(
+      `${baseUrl}/update/driver`,
+      driversInfo
+    );
+    console.log("updateDriverInfoResponse::", updateDriverInfoResponse);
+    const { status, message } = updateDriverInfoResponse.data;
+    if (status === "success") {
+      toast.success(message);
+    }
+    return updateDriverInfoResponse;
+  } catch (error) {
+    console.warn("Error updating driver::", error);
+    toast.error(error.response.message);
+    return error.response;
+  }
 };

@@ -1,0 +1,22 @@
+.quote__main {
+  height: 100vh;
+}
+.p_msg {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: green;
+  border-bottom: 2px solid red;
+}
+.quote__info {
+  box-sizing: border-box;
+  height: auto;
+  border-radius: 1px solid blue;
+}
+.quote__info > p {
+  font-size: 1.1 rem;
+  font-weight: 500;
+}
+.quote__info > p > span {
+  font-size: 0.9rem;
+  color: gray;
+}

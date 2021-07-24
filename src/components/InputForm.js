@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "../css/Inputform.css";
-import { useHistory } from "react-router-dom";
 import { saveDriversQuote } from "../apis/insuranceApis";
+import { toast } from "react-toastify";
+import { useHistory } from "react-router-dom";
 export const InputForm = () => {
   const [salutation, setSalutation] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -18,7 +19,7 @@ export const InputForm = () => {
   const [canUseOutSide, setCanUserOutSide] = useState("");
   const [currentValue, setCurrentValue] = useState(0);
   const [registeredDate, setRegisteredDate] = useState("");
-
+  let history = useHistory();
   const VALUE_SELECTION = "*required";
   const REQUIRED_FIELD = "can't be empty";
   const [fieldErrors, setFieldErrors] = useState({
@@ -45,56 +46,92 @@ export const InputForm = () => {
       [prop]: udpatedValue,
     }));
   };
-  let history = useHistory();
   const reloadForm = () => {
-    history.push("/");
+    clearFormValues();
   };
   const validationCheck = () => {
-    console.log("validation checks::", vehicleType, engineSize, driversCount);
+    let isValidationError = false;
+    console.log("validation checks::", isCommercial, canUseOutSide);
     if (salutation === "") {
       updateErrorProp("salutation", VALUE_SELECTION);
+      isValidationError = true;
     }
     if (firstName === "") {
       updateErrorProp("firstName", `First Name ${REQUIRED_FIELD}`);
+      isValidationError = true;
     }
     if (lastName === "") {
       updateErrorProp("lastName", `LastName ${REQUIRED_FIELD}`);
+      isValidationError = true;
     }
     if (telephone === "") {
       updateErrorProp("telephone", `Telephone ${REQUIRED_FIELD}`);
+      isValidationError = true;
     }
     if (addressLine1 === "" || addressLine2 === "") {
       updateErrorProp("addressLine", `Address ${REQUIRED_FIELD}`);
+      isValidationError = true;
     }
     if (city === "") {
       updateErrorProp("city", `City ${REQUIRED_FIELD}`);
+      isValidationError = true;
     }
     if (pincode === "") {
       updateErrorProp("pincode", `Pincode ${REQUIRED_FIELD}`);
+      isValidationError = true;
     }
     if (vehicleType === "") {
       updateErrorProp("vehicleType", VALUE_SELECTION);
+      isValidationError = true;
     }
     if (engineSize === "") {
       updateErrorProp("engineSize", VALUE_SELECTION);
+      isValidationError = true;
     }
     if (driversCount === "") {
       updateErrorProp("driversCount", VALUE_SELECTION);
+      isValidationError = true;
     }
-    if (isCommercial === "" || canUseOutSide === "") {
+    if (isCommercial === "") {
+      console.log("iscommercial check");
       updateErrorProp("isCommercial", VALUE_SELECTION);
+      isValidationError = true;
+    }
+    if (canUseOutSide === "") {
+      console.log("canuse outside check");
+      updateErrorProp("canUseOutSide", VALUE_SELECTION);
+      isValidationError = true;
     }
     if (registeredDate === 0) {
       updateErrorProp("registeredDate", VALUE_SELECTION);
+      isValidationError = true;
     }
     if (currentValue === 0) {
       updateErrorProp("currentValue", VALUE_SELECTION);
+      isValidationError = true;
     }
+    return isValidationError;
   };
-
+  const clearFormValues = () => {
+    setAddrL1("");
+    setAddrL2("");
+    setSalutation("");
+    setFirstName("");
+    setLastName("");
+    setTelephone("");
+    setPinCode("");
+    setCity("");
+    setCanUserOutSide("");
+    setCurrentValue("");
+    setDriversCount("");
+    setEngineSize("");
+    setIsCommercial("");
+    setFieldErrors({ ...fieldErrors, [Object.keys(fieldErrors)]: "" });
+    console.log(Object.keys(fieldErrors));
+  };
   const submitForm = async (e) => {
-    validationCheck();
-    console.log("Submitting Form");
+    let isValidationError = validationCheck();
+    console.log("Submitting Form::" + isValidationError);
     let driversInfo = {
       salutation,
       firstName,
@@ -106,14 +143,27 @@ export const InputForm = () => {
       vehicleType,
       engineSize,
       driversCount,
-      isCommercial,
-      canUseOutSide,
+      isCommercial: isCommercial === "Yes" ? true : false,
+      canUseOutSide: canUseOutSide === "Yes" ? true : false,
       currentValue,
       registeredDate,
     };
-    let response = await saveDriversQuote(driversInfo);
-    console.log("response::", response);
-    alert(response.message);
+    if (!isValidationError) {
+      let response = await saveDriversQuote(driversInfo);
+      console.log("response::", response);
+      const { status, message } = response.data;
+      if (status === "success") {
+        toast.success(message);
+        clearFormValues();
+        // route to confirmation page
+        history.push(`/quote/:${response.data.data.id}`);
+      } else {
+        toast.error(response.data.message);
+        clearFormValues();
+      }
+    } else {
+      toast.warning("Form Validation Error");
+    }
   };
 
   return (
@@ -310,29 +360,21 @@ export const InputForm = () => {
               <label className="form-label">
                 Will the vechile be used outside registered state ?
               </label>
-              <div
-                className="form-check"
-                onChange={(e) => setCanUserOutSide(e.target.value)}
-              >
-                <div>
-                  <input
-                    className="form-check-input"
-                    name="registered"
-                    type="radio"
-                    value={canUseOutSide}
-                  />
-                  <span>Yes</span>
-                </div>
-                <div>
-                  <input
-                    className="form-check-input"
-                    name="registered"
-                    type="radio"
-                    value={canUseOutSide}
-                  />
-                  <span>No</span>
-                </div>
-              </div>
+              <input
+                type="radio"
+                checked={canUseOutSide === "Yes"}
+                onClick={(e) => setCanUserOutSide(e.target.value)}
+                value="Yes"
+              />{" "}
+              <span className="radio_option">Yes</span>
+              <input
+                type="radio"
+                checked={canUseOutSide === "No"}
+                onClick={(e) => setCanUserOutSide(e.target.value)}
+                value="No"
+                style={{ margin: "4px" }}
+              />{" "}
+              <span className="radio_option">No</span>
               <span
                 className="error__message"
                 hidden={fieldErrors.canUseOutSide === ""}
@@ -344,29 +386,21 @@ export const InputForm = () => {
               <label className="form-label">
                 Will the vechile be used for commercial purpose ?
               </label>
-              <div
-                className="form-check"
-                onChange={(e) => setIsCommercial(e.target.value)}
-              >
-                <div>
-                  <input
-                    className="form-check-input"
-                    name="registered"
-                    type="radio"
-                    value={isCommercial}
-                  />
-                  <span>Yes</span>
-                </div>
-                <div>
-                  <input
-                    className="form-check-input"
-                    name="registered"
-                    type="radio"
-                    value={isCommercial}
-                  />
-                  <span>No</span>
-                </div>
-              </div>
+              <input
+                type="radio"
+                checked={isCommercial === "Yes"}
+                onClick={(e) => setIsCommercial(e.target.value)}
+                value="Yes"
+              />{" "}
+              Yes
+              <input
+                type="radio"
+                checked={isCommercial === "No"}
+                onClick={(e) => setIsCommercial(e.target.value)}
+                value="No"
+                style={{ margin: "4px" }}
+              />{" "}
+              No
               <span
                 className="error__message"
                 hidden={fieldErrors.isCommercial === ""}

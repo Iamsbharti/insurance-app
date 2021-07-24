@@ -70,3 +70,7 @@ button:hover {
   font-size: 0.9rem;
   margin: 0px 9px 10px 19px;
 }
+.radio_option {
+  display: inline-block;
+  padding: 4px;
+}
