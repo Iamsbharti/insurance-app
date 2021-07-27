@@ -1,7 +1,9 @@
 .quote__main {
-  height: 100vh;
+  height: 90vh;
+  margin: 40px;
 }
 .p_msg {
+  margin: 30px;
   font-size: 1.1rem;
   font-weight: 600;
   color: green;
@@ -11,6 +13,7 @@
   box-sizing: border-box;
   height: auto;
   border-radius: 1px solid blue;
+  margin: 40px;
 }
 .quote__info > p {
   font-size: 1.1 rem;

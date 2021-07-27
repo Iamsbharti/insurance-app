@@ -6,6 +6,7 @@ import { Route, Switch } from "react-router-dom";
 import { Admin } from "./components/Admin";
 import { Home } from "./components/Home";
 import { ToastContainer } from "react-toastify";
+import { QuoteConfirmation } from "./components/QuoteConfirmation";
 import "react-toastify/dist/ReactToastify.css";
 function App() {
   return (
@@ -17,6 +18,9 @@ function App() {
         </Route>
         <Route exact path="/quote">
           <InputForm />
+        </Route>
+        <Route exact path="/quote/success/:id">
+          <QuoteConfirmation />
         </Route>
         <Route path="/admin">
           <Admin />

@@ -127,7 +127,6 @@ export const InputForm = () => {
     setEngineSize("");
     setIsCommercial("");
     setFieldErrors({ ...fieldErrors, [Object.keys(fieldErrors)]: "" });
-    console.log(Object.keys(fieldErrors));
   };
   const submitForm = async (e) => {
     let isValidationError = validationCheck();
@@ -151,12 +150,16 @@ export const InputForm = () => {
     if (!isValidationError) {
       let response = await saveDriversQuote(driversInfo);
       console.log("response::", response);
-      const { status, message } = response.data;
+      const { status, message, data } = response;
+      console.log(status, message, data);
       if (status === "success") {
-        toast.success(message);
-        clearFormValues();
+        console.log("quote data:", data);
         // route to confirmation page
-        history.push(`/quote/:${response.data.data.id}`);
+        history.push({
+          pathname: `/quote/success/:${data.id}`,
+          state: { driverInfo: data },
+        });
+        clearFormValues();
       } else {
         toast.error(response.data.message);
         clearFormValues();

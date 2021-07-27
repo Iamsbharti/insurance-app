@@ -1,8 +1,12 @@
 import React from "react";
 import "../css/Quote.css";
+import { useLocation } from "react-router-dom";
+export const QuoteConfirmation = () => {
+  let location = useLocation();
+  console.log("quoteconfirmation::", location.state);
+  const { id, salutation, firstName, lastName, quotation } =
+    location.state.driverInfo;
 
-export const QuoteConfirmation = (driverInfo) => {
-  const { salutation, firstName, lastName, quotation } = driverInfo;
   return (
     <div className="quote__main">
       <p className="p_msg">
@@ -10,14 +14,14 @@ export const QuoteConfirmation = (driverInfo) => {
       </p>
       <div className="quote__info">
         <p>
-          Driver ID:: <span>{driverInfo.id}</span>
+          Driver ID -- <span>{id}</span>
         </p>
         <p>
-          Driver Name::{" "}
+          Driver Name --{" "}
           <span>{salutation + " " + firstName + " " + lastName}</span>
         </p>
         <p>
-          Quotation:: <span>{quotation}</span>
+          Quotation -- <span>{quotation}</span>
         </p>
       </div>
     </div>
