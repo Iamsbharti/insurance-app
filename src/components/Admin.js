@@ -6,14 +6,12 @@ import {
   deleteDriverQuote,
 } from "../apis/insuranceApis";
 import { UpdateDriverInfo } from "./UpdateDriverInfo";
-import { useHistory } from "react-router-dom";
 export const Admin = () => {
   const [action, setAction] = useState("Search");
   const [driverId, setDriverId] = useState("");
   const [toggleDriversInfo, setToggleDriversInfo] = useState(true);
   const [driversInfo, setDriversInfo] = useState({});
   const [errorMessage, setErrorMessage] = useState("");
-  let history = useHistory();
   const handleAdminActions = async (action) => {
     let response;
     console.log("handle admin actions::", action);
