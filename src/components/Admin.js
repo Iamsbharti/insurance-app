@@ -12,6 +12,7 @@ export const Admin = () => {
   const [toggleDriversInfo, setToggleDriversInfo] = useState(true);
   const [driversInfo, setDriversInfo] = useState({});
   const [errorMessage, setErrorMessage] = useState("");
+  console.log("action:", action, driverId);
   const handleAdminActions = async (action) => {
     let response;
     console.log("handle admin actions::", action);
@@ -21,23 +22,22 @@ export const Admin = () => {
         console.log("searching api");
         response = await getDriversInfo(driverId);
         console.log("response::", response);
-        setToggleDriversInfo(!toggleDriversInfo);
+        setToggleDriversInfo(false);
         if (response && response.status === "success") {
           setDriversInfo(response.data);
         } else {
           setDriversInfo(response.data.data);
           setErrorMessage(response.data.message);
         }
-        setDriverId("");
         break;
       case "Delete":
+        console.log("delete ops");
         response = await deleteDriverQuote(driverId);
         if (response && response.status === "success") {
           setErrorMessage(response.message);
         } else {
           setErrorMessage(response.data.message);
         }
-        setDriverId("");
         break;
       default:
         return "";
