@@ -1,5 +1,4 @@
 .input__form__main {
-  height: 100vh;
   padding: 2rem;
 }
 .name__address__section {
@@ -51,7 +50,6 @@ button {
   font-weight: 500 !important;
   font-size: 1.1rem !important;
   border-radius: 5px !important;
-  width: 8vw !important;
 }
 
 button {
@@ -73,4 +71,12 @@ button:hover {
 .radio_option {
   display: inline-block;
   padding: 4px;
+}
+.btn__section {
+  margin-left: 140px;
+}
+@media (max-width: 800px) {
+  .btn__section {
+    margin-left: 0px;
+  }
 }

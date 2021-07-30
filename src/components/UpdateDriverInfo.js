@@ -19,9 +19,10 @@ export const UpdateDriverInfo = ({ driversInfo, manageDriverInfoUpdates }) => {
   return (
     <>
       <div>
-        <div className="name__address__section">
-          <div className="name__section">
-            <span className="section__intro">Vehicle Owner's Info</span>
+        <div className="driver_update_section">
+          <hr />
+          <div>
+            <span className="section__intro">Update Vehicle Owner's Info</span>
             <select
               className="form-select salutation__text"
               aria-label="Prefix"
@@ -59,8 +60,20 @@ export const UpdateDriverInfo = ({ driversInfo, manageDriverInfoUpdates }) => {
               value={toUpdateDriverInfo.telephone}
               onChange={(e) => updateDriverState("telephone", e.target.value)}
             />
+            <label>Quote Amount</label>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Quote Amount"
+              disabled
+              name={driversInfo.quoteAmount}
+              value={
+                toUpdateDriverInfo.quoteAmount &&
+                toUpdateDriverInfo.quoteAmount.toFixed(2)
+              }
+            />
           </div>
-          <div className="address__section">
+          <div>
             <span className="section__intro">Address</span>
             <div className="input__card">
               <textarea
@@ -94,22 +107,10 @@ export const UpdateDriverInfo = ({ driversInfo, manageDriverInfoUpdates }) => {
               />
             </div>
           </div>
-          <div>
-            <label>Quote Amount</label>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Quote Amount"
-              disabled
-              name={driversInfo.quoteAmount}
-              value={
-                toUpdateDriverInfo.quoteAmount &&
-                toUpdateDriverInfo.quoteAmount.toFixed(2)
-              }
-            />
-          </div>
         </div>
-        <button onClick={handleDriverInfoUpdates}>update</button>
+        <div className="btn__section">
+          <button onClick={handleDriverInfoUpdates}>update</button>
+        </div>
       </div>
     </>
   );

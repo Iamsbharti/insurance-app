@@ -1,6 +1,6 @@
 .admin__main {
   height: 100vh;
-  padding: 4rem;
+  padding: 2rem;
 }
 .intro__admin {
   font-size: 1.2rem;
@@ -20,4 +20,26 @@
 }
 button {
   margin-top: 2rem !important;
+}
+.driver_update_section {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+@media (max-width: 800px) {
+  .admin__main {
+    height: 128vh;
+  }
+  .admin__contents {
+    display: block;
+  }
+  .admin__inputs__section,
+  .admin__info__Section {
+    margin: 0px;
+    width: 100%;
+  }
+  .driver_update_section {
+    display: block;
+  }
 }

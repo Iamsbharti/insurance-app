@@ -2,6 +2,7 @@
   height: 110vh;
   background-image: url("../assets/pexels-fauxels-3183198.jpg");
   background-size: cover;
+  margin-bottom: -53px;
 }
 .intro__hero__text {
   padding: 29px 0px 50px 60px;

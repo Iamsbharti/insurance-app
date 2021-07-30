@@ -34,6 +34,7 @@ export const Admin = () => {
         console.log("delete ops");
         response = await deleteDriverQuote(driverId);
         if (response && response.status === "success") {
+          setToggleDriversInfo(true);
           setErrorMessage(response.message);
         } else {
           setErrorMessage(response.data.message);
