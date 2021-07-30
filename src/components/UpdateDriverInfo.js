@@ -94,6 +94,20 @@ export const UpdateDriverInfo = ({ driversInfo, manageDriverInfoUpdates }) => {
               />
             </div>
           </div>
+          <div>
+            <label>Quote Amount</label>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Quote Amount"
+              disabled
+              name={driversInfo.quoteAmount}
+              value={
+                toUpdateDriverInfo.quoteAmount &&
+                toUpdateDriverInfo.quoteAmount.toFixed(2)
+              }
+            />
+          </div>
         </div>
         <button onClick={handleDriverInfoUpdates}>update</button>
       </div>
